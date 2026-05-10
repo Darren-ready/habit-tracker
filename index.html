@@ -20,8 +20,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .app{display:flex;min-height:100vh}
 
 /* ── Sidebar toggle ── */
-.toggle-btn{background:transparent;border:1px solid var(--border);color:var(--t2);cursor:pointer;border-radius:6px;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all .12s;font-family:'DM Sans',sans-serif;}
+.toggle-btn{background:transparent;border:1px solid var(--border);color:var(--t2);cursor:pointer;border-radius:6px;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .12s;font-family:'DM Sans',sans-serif;line-height:1;}
 .toggle-btn:hover{background:var(--s2);color:var(--text);}
+.show-btn{display:none;position:fixed;top:14px;left:12px;z-index:50;background:var(--green);border:none;color:#fff;cursor:pointer;border-radius:6px;width:32px;height:32px;align-items:center;justify-content:center;font-size:16px;font-weight:700;transition:all .12s;font-family:'DM Sans',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.show-btn:hover{background:#245c42;}
+.app.collapsed .show-btn{display:flex;}
+.app.collapsed .topbar{padding-left:52px;}
 
 /* ── Sidebar ── */
 .sidebar{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:24px 14px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;transition:width .25s,opacity .2s;overflow:hidden;}
@@ -282,9 +286,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <body>
 <div class="app" id="app">
 <nav class="sidebar">
-  <div class="logo">
+  <div class="logo" style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-left:8px">
+  <div>
     <span class="logo-title" id="logo-title" contenteditable="true" spellcheck="false" title="Click to edit">Habit</span><br>
     <span class="logo-sub" id="logo-sub" contenteditable="true" spellcheck="false" title="Click to edit">tracker ✦ 2025</span>
+  </div>
+  <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()" title="Hide sidebar">✕</button>
   </div>
   <button class="nav-item active" onclick="showView('today')" id="nav-today"><span class="ic">☀</span><span>Today</span></button>
   <button class="nav-item" onclick="showView('weekly')" id="nav-weekly"><span class="ic">📅</span><span>Week overview</span></button>
@@ -1195,15 +1202,11 @@ initLogo();
 // ── Sidebar toggle ──
 function toggleSidebar() {
   const app = document.getElementById('app');
-  const btn = document.getElementById('toggle-btn');
   const collapsed = app.classList.toggle('collapsed');
-  btn.textContent = collapsed ? '☰' : '✕';
   localStorage.setItem('habit_sidebar_collapsed', collapsed ? '1' : '0');
 }
-// Restore state on load
 if (localStorage.getItem('habit_sidebar_collapsed') === '1') {
   document.getElementById('app').classList.add('collapsed');
-  document.getElementById('toggle-btn').textContent = '☰';
 }
 
 </script>
