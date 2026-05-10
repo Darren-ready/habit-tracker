@@ -20,16 +20,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .app{display:flex;min-height:100vh}
 
 /* ── Sidebar toggle ── */
-.toggle-btn{position:fixed;top:14px;left:14px;z-index:200;width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--t2);transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+.toggle-btn{background:transparent;border:1px solid var(--border);color:var(--t2);cursor:pointer;border-radius:6px;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all .12s;font-family:'DM Sans',sans-serif;}
 .toggle-btn:hover{background:var(--s2);color:var(--text);}
-.app.collapsed .toggle-btn{left:14px;}
 
 /* ── Sidebar ── */
-.sidebar{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:24px 14px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;transition:width .25s,padding .25s,opacity .2s;overflow:hidden;}
-.app.collapsed .sidebar{width:0;padding:0;opacity:0;pointer-events:none;}
-.app.collapsed .main{margin-left:0;}
-.topbar{padding-left:52px !important;}
-.app:not(.collapsed) .topbar{padding-left:28px !important;}
+.sidebar{width:230px;background:var(--surface);border-right:1px solid var(--border);padding:24px 14px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;transition:width .25s,opacity .2s;overflow:hidden;}
+.app.collapsed .sidebar{width:0;min-width:0;padding:0;opacity:0;pointer-events:none;}
 .logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--green);margin-bottom:24px;padding-left:8px}
 .logo span{color:var(--t3);font-size:11px;font-family:'DM Sans',sans-serif;display:block;font-weight:400;margin-top:1px}
 .logo-title,.logo-sub{cursor:text;border-radius:4px;padding:1px 3px;margin:-1px -3px;transition:background .12s;outline:none;display:inline-block;min-width:20px}
@@ -285,8 +281,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 </head>
 <body>
 <div class="app" id="app">
-<button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
-
 <nav class="sidebar">
   <div class="logo">
     <span class="logo-title" id="logo-title" contenteditable="true" spellcheck="false" title="Click to edit">Habit</span><br>
